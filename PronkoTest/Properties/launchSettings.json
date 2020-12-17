@@ -1,5 +1,6 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
     "PronkoTest": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
@@ -10,5 +11,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "SECRET": "MyKeyIsRatherLongForCreatingJsonWebToken"
       }
-    }
+    } 
+  }
 }
