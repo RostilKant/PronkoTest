@@ -20,6 +20,10 @@ namespace PronkoTest
         {
             services.AddControllers();
             
+            services.ConfigureSwagger();
+            
+            services.ConfigureDbContext();
+
             services.ConfigureCors();
             
         }

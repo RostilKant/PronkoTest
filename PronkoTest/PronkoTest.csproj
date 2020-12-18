@@ -7,6 +7,11 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" NoWarn="NU1605" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.0" NoWarn="NU1605" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.1-dev-00188" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="5.0.0-dev-00174" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
@@ -14,6 +19,26 @@
 
     <ItemGroup>
       <Folder Include="Controllers" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Entities\Entities.csproj" />
     </ItemGroup>
 
 </Project>

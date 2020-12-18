@@ -24,8 +24,7 @@ namespace PronkoTest
                     .MinimumLevel.Debug()
                     .ReadFrom.Configuration(context.Configuration)
                     .Enrich.FromLogContext()
-                    .WriteTo.Console(
-                        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+                    .WriteTo.Console()
                     .WriteTo.Seq("http://localhost:5341")
                     .WriteTo.File(
                         new RenderedCompactJsonFormatter(), 

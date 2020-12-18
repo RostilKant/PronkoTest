@@ -1,3 +1,6 @@
+using System;
+using Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -20,5 +23,10 @@ namespace PronkoTest
                         .AllowAnyMethod()
                         .WithOrigins("https://localhost:4200", "http://localhost:4200");
                 }));
+
+        public static void ConfigureDbContext(this IServiceCollection services) =>
+            services.AddDbContext<RepositoryContext>(opts => 
+                opts.UseNpgsql(Environment.GetEnvironmentVariable("PostgreSQLConnection")!, 
+                    b => b.MigrationsAssembly("PronkoTest")));
     }
 }
