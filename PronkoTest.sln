@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PronkoTest", "PronkoTest\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{0CE10A92-28B8-4F9F-9747-0C3B7B54A4B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{671C0D96-972C-4372-9D11-377D49A4318B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0CE10A92-28B8-4F9F-9747-0C3B7B54A4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE10A92-28B8-4F9F-9747-0C3B7B54A4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE10A92-28B8-4F9F-9747-0C3B7B54A4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671C0D96-972C-4372-9D11-377D49A4318B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671C0D96-972C-4372-9D11-377D49A4318B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671C0D96-972C-4372-9D11-377D49A4318B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671C0D96-972C-4372-9D11-377D49A4318B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

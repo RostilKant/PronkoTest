@@ -23,6 +23,8 @@ namespace PronkoTest
             services.ConfigureSwagger();
             
             services.ConfigureDbContext();
+            
+            services.ConfigureRepositoryManager();
 
             services.ConfigureCors();
             

@@ -3,8 +3,8 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Serilog;
-
+using Repository;
+using Repository.Contracts;
 namespace PronkoTest
 {
     public static class ServiceExtensions
@@ -28,5 +28,8 @@ namespace PronkoTest
             services.AddDbContext<RepositoryContext>(opts => 
                 opts.UseNpgsql(Environment.GetEnvironmentVariable("PostgreSQLConnection")!, 
                     b => b.MigrationsAssembly("PronkoTest")));
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }
