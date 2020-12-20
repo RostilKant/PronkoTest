@@ -7,13 +7,13 @@ using Services.Contracts;
 
 namespace PronkoTest.Controllers
 {
-    [Route("api/user")]
+    [Route("api/users")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }

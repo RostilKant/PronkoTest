@@ -18,6 +18,10 @@ namespace PronkoTest
             CreateMap<User, UserInfoDto>();
 
             CreateMap<UserUpdateDto, User>();
+
+            CreateMap<Note, NoteDto>();
+
+            CreateMap<NoteManipulationDto, Note>();
         }
     }
 }

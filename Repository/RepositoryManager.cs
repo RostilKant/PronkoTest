@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Entities;
 using Repository.Contracts;
 
@@ -15,6 +16,6 @@ namespace Repository
         
         public INoteRepository Note => _noteRepository ??= new NoteRepository(_repositoryContext);
 
-        public void Save() => _repositoryContext.SaveChanges();
+        public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
     }
 }
