@@ -21,7 +21,7 @@ namespace PronkoTest
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog((context, provider, loggerConfiguration) => loggerConfiguration
-                    .MinimumLevel.Debug()
+                    .MinimumLevel.Information()
                     .ReadFrom.Configuration(context.Configuration)
                     .Enrich.FromLogContext()
                     .WriteTo.Console()

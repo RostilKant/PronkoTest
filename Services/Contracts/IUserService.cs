@@ -10,5 +10,13 @@ namespace Services.Contracts
 
         Task<bool> Validate(UserAuthenticationDto userAuthentication, ModelStateDictionary modelState);
         Task<string> CreateToken();
+
+        Task<UserInfoDto> GetInformation(string userId);
+        
+        Task EditInformation(string userId, UserUpdateDto userUpdate);
+        
+        Task ChangePassword(string userId, ChangePassDto changePass, ModelStateDictionary modelState);
+
+
     }
 }

@@ -12,7 +12,12 @@ namespace PronkoTest
             CreateMap<UserRegistrationDto, User>()
                 .ForMember(user => user.UserName,
                     opt => 
-                        opt.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
+                        opt.MapFrom(x => 
+                            string.Join(' ', x.FirstName, x.LastName)));
+
+            CreateMap<User, UserInfoDto>();
+
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }

@@ -75,7 +75,50 @@ namespace Services
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
-        private SigningCredentials GetSigningCredentials()
+        public async Task<UserInfoDto> GetInformation(string userId)
+        {
+            _user = await _userManager.FindByIdAsync(userId);
+
+            if (_user == null) 
+                _logger.Log(LogLevel.Error, "Something went wrong! There is no such user!");
+            
+            return _mapper.Map<UserInfoDto>(_user);
+        }
+
+        public async Task EditInformation(string userId, UserUpdateDto userUpdate)
+        {
+            _user = await _userManager.FindByIdAsync(userId);
+            
+            if (_user == null)
+                _logger.Log(LogLevel.Error, "Something went wrong! There is no such user!");
+            
+            _mapper.Map(userUpdate, _user);
+            await _userManager.UpdateAsync(_user);
+        }
+
+        public async Task ChangePassword(string userId, ChangePassDto changePass, ModelStateDictionary modelState)
+        {
+            _user = await _userManager.FindByIdAsync(userId);
+            
+            if (_user == null) 
+                _logger.Log(LogLevel.Error, "Something went wrong! There is no such user!");
+            
+            if (!await _userManager.CheckPasswordAsync(_user, changePass.OldPassword))
+            {
+                modelState.TryAddModelError("wrong-pass", "Invalid current password!");
+                return;
+            }
+
+            if (changePass.OldPassword == changePass.NewPassword)
+            {
+                modelState.TryAddModelError("same-pass", "New password can't be such as current password!");
+                return;
+            }
+            
+            await _userManager.ChangePasswordAsync(_user, changePass.OldPassword, changePass.NewPassword);
+        }
+
+        private static SigningCredentials GetSigningCredentials()
         {
             var secret =
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET")!));
@@ -95,7 +138,7 @@ namespace Services
             return claims;
         }
 
-        private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
+        private static JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtIssuer = Environment.GetEnvironmentVariable("JWTIssuer");
             var jwtAudience = Environment.GetEnvironmentVariable("JWTAudience");
