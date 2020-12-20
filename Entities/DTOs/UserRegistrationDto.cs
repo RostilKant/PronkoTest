@@ -19,6 +19,6 @@ namespace Entities.DTOs
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
         
-        public List<string> Roles { get; set; }
+        public ICollection<string> Roles { get; set; }
     }
 }

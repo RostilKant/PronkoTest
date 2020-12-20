@@ -10,11 +10,19 @@ namespace Entities
     {
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
-            builder.HasData(new List<IdentityRole>
-            {
-                new IdentityRole("User"),
-                new IdentityRole("Admin")
-            }); 
+            builder.HasData(
+                new IdentityRole
+                {
+                   Name = "User",
+                   NormalizedName = "USER"
+                },
+                new IdentityRole
+                {
+                    Name = "Administrator",
+                    NormalizedName = "ADMINISTRATOR"
+                }   
+                
+            ); 
         }
     }
 }

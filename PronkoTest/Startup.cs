@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,8 +35,10 @@ namespace PronkoTest
             services.ConfigureRepositoryManager();
 
             services.AddScoped<IUserService, UserService>();
-            
+
+            services.AddAuthentication();
             services.ConfigureIdentity();
+            
             services.ConfigureJwt();
 
         }
@@ -48,7 +51,7 @@ namespace PronkoTest
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PronkoTest v1"));
             }
-
+            
             app.UseSerilogRequestLogging();
 
             app.UseCors("CorsPolicy");

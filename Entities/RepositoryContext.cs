@@ -14,11 +14,10 @@ namespace Entities
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new RolesConfiguration());
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new RolesConfiguration());
         }
-
         public DbSet<Note> Notes { get; set; }
-        
+
     }
 }

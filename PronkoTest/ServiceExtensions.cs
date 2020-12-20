@@ -29,10 +29,17 @@ namespace PronkoTest
                         .WithOrigins("https://localhost:4200", "http://localhost:4200");
                 }));
 
-        public static void ConfigureDbContext(this IServiceCollection services) =>
+        public static void ConfigureDbContext(this IServiceCollection services)
+        {
+            var connection = Environment.GetEnvironmentVariable("PostgreSQLConnection");
+            var secret =  Environment.GetEnvironmentVariable("SECRET");
+            var jwtIssuer = Environment.GetEnvironmentVariable("JWTIssuer");
+            var jwtAudience = Environment.GetEnvironmentVariable("JWTAudience");
             services.AddDbContext<RepositoryContext>(opts => 
-                opts.UseNpgsql(Environment.GetEnvironmentVariable("PostgreSQLConnection")!, 
+                opts.UseNpgsql(connection, 
                     b => b.MigrationsAssembly("PronkoTest")));
+        }
+            
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
@@ -47,6 +54,7 @@ namespace PronkoTest
                 opts.Password.RequireNonAlphanumeric = true;
                 opts.Password.RequiredLength = 10;
                 opts.User.RequireUniqueEmail = true;
+                opts.User.AllowedUserNameCharacters = string.Empty;
             });
 
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);

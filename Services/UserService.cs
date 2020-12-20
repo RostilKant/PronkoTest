@@ -47,9 +47,8 @@ namespace Services
 
                 return false;
             }
-
+            
             await _userManager.AddToRolesAsync(_user, userRegistration.Roles);
-
             return true;
         }
 
