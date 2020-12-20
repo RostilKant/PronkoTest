@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Entities;
 using Entities.DTOs;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -24,9 +25,9 @@ namespace Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<NoteDto>> GetNotesAsync(string userId, ModelStateDictionary modelState)
+        public async Task<IEnumerable<NoteDto>> GetNotesAsync(string userId, NoteParameters noteParameters, ModelStateDictionary modelState)
         {
-            var notes = await _repositoryManager.Note.GetAllNotesAsync(userId, false);
+            var notes = await _repositoryManager.Note.GetAllNotesAsync(userId, noteParameters, false);
             if (notes == null)
             {
                 _logger.Log(LogLevel.Error, "No notes!");

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Entities;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,10 @@ namespace PronkoTest.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllNotes()
+        public async Task<IActionResult> GetAllNotes([FromQuery] NoteParameters noteParameters)
         {
-            var notes = await _noteService.GetNotesAsync(HttpContext.User.Identity?.Name, ModelState);
+            var notes = await _noteService.GetNotesAsync(HttpContext.User.Identity?.Name, 
+                noteParameters, ModelState);
             
             if (ModelState.ErrorCount > 0)
                 return BadRequest(ModelState);

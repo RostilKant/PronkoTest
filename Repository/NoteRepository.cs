@@ -15,8 +15,11 @@ namespace Repository
         public NoteRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         { }
 
-        public async Task<IEnumerable<Note>> GetAllNotesAsync(string userId, bool trackChanges) =>
-            await FindByCondition(x => x.UserId == userId, trackChanges).ToListAsync();
+        public async Task<IEnumerable<Note>> GetAllNotesAsync(string userId, NoteParameters noteParameters, bool trackChanges) =>
+            await FindByCondition(x => x.UserId == userId, trackChanges)
+                .Skip((noteParameters.PageNumber - 1) * noteParameters.PageSize)
+                .Take(noteParameters.PageSize)
+                .ToListAsync();
 
         public async Task<Note> GetNoteByIdAsync(string userId, Guid noteId, bool trackChanges) =>
             await FindByCondition(x => x.UserId.Equals(userId) && x.Id.Equals(noteId), 
