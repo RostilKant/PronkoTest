@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Entities;
 using Entities.Models;
@@ -18,6 +19,31 @@ namespace PronkoTest
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "PronkoTest", Version = "v1"});
+                
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Bearer JWT",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        },
+                        Name = "Bearer"
+                    },
+                    new List<string>()
+                    }
+                });
             });
         public static void ConfigureCors(this IServiceCollection services) =>
             services.AddCors(options => 
@@ -32,11 +58,8 @@ namespace PronkoTest
         public static void ConfigureDbContext(this IServiceCollection services)
         {
             var connection = Environment.GetEnvironmentVariable("PostgreSQLConnection");
-            var secret =  Environment.GetEnvironmentVariable("SECRET");
-            var jwtIssuer = Environment.GetEnvironmentVariable("JWTIssuer");
-            var jwtAudience = Environment.GetEnvironmentVariable("JWTAudience");
             services.AddDbContext<RepositoryContext>(opts => 
-                opts.UseNpgsql(connection, 
+                opts.UseNpgsql(connection!, 
                     b => b.MigrationsAssembly("PronkoTest")));
         }
             

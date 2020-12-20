@@ -35,6 +35,7 @@ namespace PronkoTest
             services.ConfigureRepositoryManager();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<INoteService, NoteService>();
 
             services.AddAuthentication();
             services.ConfigureIdentity();
